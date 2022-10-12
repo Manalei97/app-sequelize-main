@@ -10,7 +10,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       file: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false
       },
       photoableId: {
         type: Sequelize.INTEGER
