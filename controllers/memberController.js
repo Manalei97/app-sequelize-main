@@ -37,19 +37,31 @@ var store = async function (req, res, next) {
         res.send(result)
         return
     }
+    var memberPhotos = []
+    if (req.files.length) {
+        for (var i =0; i < req.files.length; i++) {
+            memberPhotos.push({
+                file: req.files[i].filename
+            })
+        }
+    }
     password = authService.hashPassword(password)
     var [member, created] = await models.Member.findOrCreate({
         where: {
-            email: email
+            email: email,
         },
         defaults: {
             name: name,
             // email: email,
             phone: phone,
             gender: gender,
-            password: password
-        }
-    })
+            password: password,
+            Photos: memberPhotos,
+        },
+        include: models.Photo
+
+    }
+    )
     if (created) {
         result.messages.push('Member has been created successfully')
     } else {
@@ -68,7 +80,8 @@ var show = async function (req, res, next) {
     var id = req.params.id
     var member = await models.Member.findByPk(id, {
         include: [
-            models.Trip
+            models.Trip,
+            models.Photo
         ]
     })
     if (member) {
