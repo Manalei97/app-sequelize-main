@@ -60,8 +60,7 @@ var store = async function (req, res, next) {
         },
         include: models.Photo
 
-    }
-    )
+    })
     if (created) {
         result.messages.push('Member has been created successfully')
     } else {

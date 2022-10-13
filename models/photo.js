@@ -19,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Photo.belongsTo(models.Member, { foreignKey: 'PhotoableId', constraints: false });
-      Photo.belongsTo(models.Trip, { foreignKey: 'PhotoableId', constraints: false });
+      Photo.belongsTo(models.Member, { foreignKey: 'photoableId', constraints: false });
+      Photo.belongsTo(models.Trip, { foreignKey: 'photoableId', constraints: false });
 
     }
   }
@@ -35,9 +35,9 @@ module.exports = (sequelize, DataTypes) => {
   Photo.addHook("afterFind", findResult => {
     if (!Array.isArray(findResult)) findResult = [findResult];
     for (const instance of findResult) {
-      if (instance.PhotoableType === "Trip" && instance.Trip !== undefined) {
+      if (instance.PhotoableType === "trip" && instance.Trip !== undefined) {
         instance.Photoable = instance.Trip;
-      } else if (instance.PhotoableType === "Member" && instance.Member !== undefined) {
+      } else if (instance.PhotoableType === "member" && instance.Member !== undefined) {
         instance.Photoable = instance.Member;
       }
       // To prevent mistakes:

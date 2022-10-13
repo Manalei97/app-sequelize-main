@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: 'photoableId',
 				constraints: false,
 				scope: {
-					photoableType: 'image'
+					photoableType: 'member'
 				}
 			  });
 		}
