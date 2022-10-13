@@ -1,4 +1,5 @@
 var models = require('../models')
+const { tripTransformer,tripsTransformer } = require('../transformers/tripTransformers')
 var store = async (req, res, next) => {
     console.log(req.files)
     var response = {
@@ -58,7 +59,7 @@ var index = async function (req, res, nex) {
     }
     var trips = await await models.Trip.findAll()
     if (Array.isArray(trips)) {
-        result.data = trips
+        result.data =tripsTransformer(trips)
     } else {
         res.status(404)
         res.success = false
@@ -80,7 +81,7 @@ var show = async function (req, res, next) {
         ]
     })
     if (trip) {
-        result.data = trip
+        result.data =tripTransformer (trip)
     } else {
         res.status(404)
         result.messages.push('Please Provide a valid ID')
