@@ -101,6 +101,7 @@ var destroy = async function (req, res, nex) {
     });
     if (deleted) {
         // result.data=trip
+        result.messages.push('Trip has been deleted')
     } else {
         res.status(404)
         result.success.push('Please try again')
