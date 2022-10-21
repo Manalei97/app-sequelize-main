@@ -19,6 +19,6 @@ router.post('/', upload.array('photo',10),store)
 router.get('/',index) 
 router.get('/:id',show)
 router.delete('/:id',destroy)
-router.put('/:id',update)
+router.put('/:id', upload.array('photo',10),update)
 
 module.exports = router;
